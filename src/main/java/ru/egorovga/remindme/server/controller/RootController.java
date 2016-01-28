@@ -6,14 +6,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
+
 @Controller
-@RequestMapping("/reminder")
-public class ReminderController {
+@RequestMapping("/")
+public class RootController {
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     @ResponseBody
-    public String getReminder(ModelMap model){
+    public String getRoot(ModelMap model) {
+        String out = "Now is " + new Date().toString();
 
-        return "My reminder";
+        return out;
     }
+
 }
