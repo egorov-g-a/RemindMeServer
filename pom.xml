@@ -14,8 +14,9 @@
         <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
         <spring-data-jpa.version>1.9.2.RELEASE</spring-data-jpa.version>
         <hibernate.version>5.0.2.Final</hibernate.version>
-        <!--<postgresql.version>9.1-901-1.jdbc4</postgresql.version>-->
         <commons-dbcp2.version>2.1.1</commons-dbcp2.version>
+        <postgresql.version>9.4-1206-jdbc41</postgresql.version>
+        <jackson-databind.version>2.7.1-1</jackson-databind.version>
     </properties>
 
     <dependencies>
@@ -37,6 +38,14 @@
             <version>${javax.servlet-api.version}</version>
         </dependency>
 
+        <!-- JSON Converter-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-databind.version}</version>
+        </dependency>
+
+
         <!-- Database -->
         <dependency>
             <groupId>org.springframework.data</groupId>
@@ -53,16 +62,10 @@
             <artifactId>hibernate-entitymanager</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>postgresql</groupId>-->
-            <!--<artifactId>postgresql</artifactId>-->
-            <!--<version>${postgresql.version}</version>-->
-        <!--</dependency>-->
-
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>9.4-1206-jdbc41</version>
+            <version>${postgresql.version}</version>
         </dependency>
 
 
