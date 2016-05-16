@@ -1,36 +1,40 @@
 package ru.egorovga.remindme.server.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.egorovga.remindme.server.entity.Remind;
-import ru.egorovga.remindme.server.repository.RemindRepository;
+import ru.egorovga.remindme.server.service.ReminderService;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/reminder")
 public class ReminderController {
 
     @Autowired
-    private RemindRepository remindRepository;
+    private ReminderService service;
 
-    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    @RequestMapping(value = "/reminders", method = RequestMethod.GET)
     @ResponseBody
-    public Remind getReminder(){
-        List<Remind> list = remindRepository.findAll();
-        return createmMockRemind();
+    public List<Remind> getAllReminders(){
+        return service.getAll();
     }
 
-    private Remind createmMockRemind() {
-        Remind remind = new Remind();
-        remind.setId(1);
-        remind.setTitle("My first remind title");
-        remind.setRemindDate(new Date());
-
-        return remind;
+    @RequestMapping(value = "/reminders/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Remind getReminder(@PathVariable("id") long remindId){
+        return service.getByID(remindId);
     }
+
+    @RequestMapping(value = "/reminders", method = RequestMethod.POST)
+    @ResponseBody
+    public Remind saveReminder(@RequestBody Remind remind){
+        return service.save(remind);
+    }
+
+    @RequestMapping(value = "/reminders/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public void deleteReminder(@PathVariable long id){
+        service.remove(id);
+    }
+
 }
